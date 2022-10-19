@@ -1,0 +1,156 @@
+#Cindy Nguyen
+#Hang man game
+#Start : 12/10/2022
+#lastedit: 19/10/2022
+
+# import
+import random
+
+#get random world from the animal list
+def get_words():
+    word= ('DOG', 'COW', 'CAT', 'HORSE', 'DONKEY', 'TIGER', 'LION', 'PANTHER', 'LEOPARD', 'CHEETAH', 'BEAR', 'ELEPHANT', 'POLAR', 'BEAR', 'TURTLE', 'TORTOISE', 'CROCODILE', 'RABBIT', 'PORCUPINE', 'HARE', 'HEN', 'PIGEON', 'ALBATROSS', 'CROW', 'FISH', 'DOLPHIN', 'FROG', 'WHALE', 'ALLIGATOR', 'EAGLE', 'FLYING', 'SQUIRREL', 'OSTRICH', 'FOX', 'GOAT', 'JACKAL', 'EMU', 'ARMADILLO', 'EEL', 'GOOSE', 'ARCTIC', 'FOX', 'WOLF', 'BEAGLE', 'GORILLA', 'CHIMPANZEE', 'MONKEY', 'BEAVER', 'ORANGUTAN', 'ANTELOPE', 'BAT', 'BADGER', 'GIRAFFE', 'HERMIT', 'CRAB', 'GIANT', 'PANDA', 'HAMSTER', 'COBRA', 'DRAGON', 'CAMEL', 'HAWK', 'DEER', 'CHAMELEON', 'HIPPOPOTAMUS', 'JAGUAR', 'CHIHUAHUA', 'KING', 'COBRA', 'IBEX', 'LIZARD', 'KOALA', 'KANGAROO', 'IGUANA', 'LLAMA', 'CHINCHILLAS', 'DODO', 'JELLYFISH', 'RHINOCEROS', 'HEDGEHOG', 'ZEBRA', 'POSSUM', 'WOMBAT', 'BISON', 'BULL', 'BUFFALO', 'SHEEP', 'MEERKAT', 'MOUSE', 'OTTER', 'SLOTH', 'OWL', 'VULTURE', 'FLAMINGO', 'RACOON', 'MOLE', 'DUCK', 'SWAN', 'LYNX', 'MONITOR', 'LIZARD', 'ELK', 'BOAR', 'LEMUR', 'MULE', 'BABOON', 'MAMMOTH', 'BLUE', 'WHALE', 'RAT', 'SNAKE', 'PEACOCK', 'DINOSAURS')
+    animal = random.choice(word)
+    return animal
+
+#make sure the input is one single letter
+def letter_check(guess):
+    
+    if len(guess) > 1:
+        print("Plese guess a Single Letter at a time! ")
+    elif len(guess) == 0:
+        print("Plese enter a letter.")
+    elif guess.isalpha() == False:
+        print("Please guess a Letter!! \nIncase You Don't Know,These Are Letters!!! \nA B C D E F G H I J K L M N O P Q R S T U V W X Y Z ")
+    else:
+        return True
+    
+#display the hang_man
+def display_man(count):
+    display_start = '+====\n|\n|\n|\n|\n+===+'
+    display_1 = '+====+\n|\n|\n|\n|\n+===+'
+    display_2 = '+====+\n|    | \n|\n|\n|\n+===+'
+    display_3 = '+====+\n|    |\n|    o\n|\n|\n+===+'
+    display_4 = '+====+\n|    |\n|    o\n|   / \n|\n+===+'
+    display_5 = '+====+\n|    |\n|    o\n|   /| \n|\n+===+'
+    display_6 = '+====+\n|    |\n|    o\n|   /|\ \n|\n+===+'
+    display_7 = '+====+\n|    |\n|    o\n|   /|\ \n|   / \n+===+'
+    display_end = '+====+\n|    |\n|    o\n|   /|\ \n|   / \  \n+===+'
+    
+    if count == 1:
+        print(display_1)
+        print("You have 7 guess left!!")
+    elif count == 2:
+        print(display_2)
+        print("Let's Gooo ~~~ I know You Can Do IT !!!")
+        print("You have 6 guess left!!")
+    elif count == 3:
+        print(display_3)
+        print("I belive in you !!!")
+        print("You have 5 guess left!!")
+    elif count == 4:
+        print(display_4)
+        print("Really ??? Did my chering mean nothing to You ???? .^. ")
+        print("You have 4 guess left!!")
+    elif count == 5:
+        print(display_5)
+        print("Are you trying to help me or kill me??")
+        print("You have 3 guess left!!")
+    elif count == 6:
+        print(display_6)
+        print("YOU HAVE ONE JOB!!!")
+        print("You have 2 guess left!!")
+    elif count == 7:
+        print(display_7)
+        print("You killing meeeeeee !!!! AHHHHHHHHH!!!! -_-")
+        print("You have 1 guess left!!")
+    elif count == 8:
+        print(display_end)
+        print("Congratulations !!!! You just win your self a Law Suit ^0^ <<~~")
+    else:
+        print(display_start)
+        print("Nice!!")
+
+#the actual game 
+def hang_man(word):
+    
+    wrd_len = len(word)
+    alreadyGuess= []
+    count= 0
+    display_start = '+====\n|\n|\n|\n|\n+===+'
+    blank_line= '-' * wrd_len
+    print(display_start)
+    print(blank_line)
+    
+    while True:
+        guesses= input("Guess: ")
+        guess= guesses.upper()
+        guess_check= letter_check(guess)
+        
+        if guess_check == True:
+            if guess not in alreadyGuess:
+                alreadyGuess.append(guess)
+                if guess in word:
+                
+                    position_of_letter = {}
+                    pos_list= []
+                    
+                    for pos,char in enumerate(word):
+                        if char == guess:
+                            pos_list.append(pos)
+                            position_of_letter= dict({char:pos_list})
+                            
+                            
+                    for letter, position in position_of_letter.items():
+                        for i in position:
+                                blank_line= blank_line[:int(i)] + letter + blank_line[int(i)+1:]
+                        
+                    print(blank_line)
+                    display_man(count)
+                else:
+                    count = count +1
+                    print(blank_line)
+                    display_man(count)
+                        
+            elif guess in alreadyGuess:
+                print('You have already guessed that letter! Please guess a different letter.')
+                print(f'Already guess letter: {",".join(alreadyGuess)}')
+                
+        if count >= 8:
+            print(f'The animal is {word}, You IDIOT !!!')
+            break
+        if '-' not in blank_line:
+            print("Congratulation, you save me !!")
+            print(f"It's a {word}!!")
+            break
+        
+                    
+            
+#the game loop    
+if __name__ == '__main__':
+    
+    print(f"Welcome to the Animal theme Hangman game!!")
+    print("Guess the correct animal and save the person !! If not the person will get hanged and its all your fault 0_0")
+    print("Goodluck and enjoy the game ^0^")
+    
+    ran_animal = get_words()
+    
+    #play game
+    
+    hang_man(ran_animal)
+    
+    again= True
+    #loopping the game 
+    while again == True:
+        ask = input("Would you like to play the game again?(Y/y or N/n) ")
+        if ask == "Y" or ask == 'y':
+            ran_animal = get_words()
+            hang_man(ran_animal)
+        elif ask == 'N' or ask == 'n':
+            print("Thank you for playing the game !!")
+            again = False
+        else:
+            print("Please answer with the provided option.")
+    
+    
+    print("Program complete")
+    exit()
