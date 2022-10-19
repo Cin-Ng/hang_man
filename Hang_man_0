@@ -2,6 +2,7 @@
 #Hang man game
 #Start : 12/10/2022
 #lastedit: 19/10/2022
+#python
 
 # import
 import random
