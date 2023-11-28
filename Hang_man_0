@@ -1,10 +1,6 @@
 #Cindy Nguyen
 #Hang man game
-#Start : 12/10/2022
-#lastedit: 19/10/2022
-#python
-
-# import
+#import
 import random
 
 #get random world from the animal list
@@ -50,7 +46,7 @@ def display_man(count):
         print("You have 5 guess left!!")
     elif count == 4:
         print(display_4)
-        print("Really ??? Did my chering mean nothing to You ???? .^. ")
+        print("Really ??? Did my cheering mean nothing to You ???? .^. ")
         print("You have 4 guess left!!")
     elif count == 5:
         print(display_5)
@@ -66,7 +62,7 @@ def display_man(count):
         print("You have 1 guess left!!")
     elif count == 8:
         print(display_end)
-        print("Congratulations !!!! You just win your self a Law Suit ^0^ <<~~")
+        print("Congratulations !!!! You just killed me! ^0^ <<~~")
     else:
         print(display_start)
         print("Nice!!")
